@@ -22,20 +22,20 @@ resource "aws_apigatewayv2_vpc_link" "eks" {
 resource "aws_apigatewayv2_integration" "eks" {
   api_id = aws_apigatewayv2_api.main.id
 
-  integration_uri    = "arn:aws:elasticloadbalancing:us-east-1:378188326309:listener/net/a9e6bdef58be344cfac6b1233fef7f21/a2ab7ac3bbd6eb40/3aba32316a0f8020"
+  integration_uri    = "arn:aws:elasticloadbalancing:us-east-1:378188326309:listener/net/a3c71340364864faaaa6a2ab103bbf9d/0bffc6d779a8e84f/418b60d7d2cc5c26"
   integration_type   = "HTTP_PROXY"
   integration_method = "ANY"
   connection_type    = "VPC_LINK"
   connection_id      = aws_apigatewayv2_vpc_link.eks.id
 }
 
-resource "aws_apigatewayv2_route" "get_echo" {
+resource "aws_apigatewayv2_route" "get_root" {
   api_id = aws_apigatewayv2_api.main.id
 
-  route_key = "GET /echo"
+  route_key = "GET /"
   target    = "integrations/${aws_apigatewayv2_integration.eks.id}"
 }
 
 output "hello_base_url" {
-  value = "${aws_apigatewayv2_stage.dev.invoke_url}/echo"
+  value = "${aws_apigatewayv2_stage.dev.invoke_url}"
 }
