@@ -6,37 +6,38 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: echoserver
+  name: testserver
   namespace: teste
 spec:
   selector:
     matchLabels:
-      app: echoserver
+      app: testserver
   replicas: 1
   template:
     metadata:
       labels:
-        app: echoserver
+        app: testserver
     spec:
       containers:
       - image: 378188326309.dkr.ecr.us-east-1.amazonaws.com/pos-tech-diner-app:hello-world
-        name: echoserver
+        name: testserver
         ports:
         - containerPort: 3000
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: echoserver
+  name: test-app-service
   namespace: teste
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-type: nlb
     service.beta.kubernetes.io/aws-load-balancer-internal: "true"
+    service.beta.kubernetes.io/aws-load-balancer-name: test
 spec:
   ports:
-  - port: 3000
+  - port: 80
     targetPort: 3000
     protocol: TCP
   type: LoadBalancer
   selector:
-    app: echoserver
+    app: testserver
