@@ -95,11 +95,11 @@ jobs:
 
       - name: Terraform Init
         id: init
-        run: terraform init"
+        run: terraform init
 
       - name: Terraform Validate
         id: validate
         run: terraform validate -no-color
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve"
+        run: terraform apply -auto-approve
