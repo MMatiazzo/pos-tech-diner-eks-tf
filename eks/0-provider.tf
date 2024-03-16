@@ -1,3 +1,5 @@
+# test trigger
+
 terraform {
   backend "s3" {
     bucket = "fiap-terraform"
