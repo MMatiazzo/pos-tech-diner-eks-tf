@@ -1,4 +1,4 @@
-# test trigger v1
+# test trigger v2
 
 terraform {
   backend "s3" {
